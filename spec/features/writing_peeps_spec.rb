@@ -8,10 +8,7 @@ feature 'Writing peeps' do
     fill_in 'peep', with: 'hello'
     click_button 'Send peep'
     expect(current_path).to eq '/feed'
-
-    within 'ul#feed' do
-      expect(page).to have_content('hello')
-    end
+    expect(page).to have_content('hello')
   end
 
   scenario 'there are no peeps in the database at the start of the test' do
