@@ -1,15 +1,12 @@
-<h1> Feed </h1>
-
-<ul id="feed">
-  <% @peeps.reverse.each do |peep| %>
-    <li>
+<% @peeps.reverse.each do |peep| %>
+  <ul id="feed-box">
+    <ol>
+      <b>@<%= peep.username %></b>
       <%= peep.message %>
       <%= peep.time %>
-      <b><%= peep.username %></b>
-      <i><%= peep.name %></i>
-    </li>
-  <% end %>
-</ul>
+    </ol>
+  </ul>
+<% end %>
 
 
 <% if current_user %>

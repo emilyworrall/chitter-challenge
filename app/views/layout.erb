@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <div style="font-family:'Georgia'">
-    <body bgcolor="#FF9999">
-    <head>
-      <title>Chitter</title>
-    </head>
+  <head>
+    <title>Chitter</title>
+      <link rel="stylesheet"type="text/css" href="https://fonts.googleapis.com/css?family=Noto Sans"/>
+      <link rel="stylesheet"type="text/css" href="https://fonts.googleapis.com/css?family=League Script"/>
+      <link rel="stylesheet" type="text/css" href="/src/style.css"
+  </head>
 
-    <body>
-      <h1>Chitter</h1>
+  <body>
+    <div class="top-banner">
+      <div id="title"><b>Chitter</b></div>
+      <div id="welcome">
+        <% if current_user %>
+          Welcome, <%= current_user.username %>
+          <form method='post' action='/sessions'>
+            <input type='hidden' name='_method' value='delete'>
+            <input type='submit' value='Sign out'>
+          </form>
+        <% end %>
+      </div>
+    </div>
 
-      <% if current_user %>
-        Welcome, <%= current_user.username %>
-        <form method='post' action='/sessions'>
-          <input type='hidden' name='_method' value='delete'>
-          <input type='submit' value='Sign out'>
-        </form>
-      <% end %>
-      <%= yield %>
-    </body>
+    <%= yield %>
+  </body>
 
-    <% if flash[:notice] %>
-      <div id='notice'>
-      <%= flash[:notice] %></div>
-    <% end %>
+  <% if flash[:notice] %>
+    <div id='notice'>
+    <%= flash[:notice] %></div>
+  <% end %>
 
-    <% if flash[:errors] && !flash[:errors].empty? %>
-      Please refer to these errors:
-        <ul id='errors'>
-          <% flash[:errors].each do |error| %>
-            <li><%= error %></li>
-          <% end %>
-        </ul>
-    <% end %>
-  </div>
+  <% if flash[:errors] && !flash[:errors].empty? %>
+    Please refer to these errors:
+      <ul id='errors'>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+  <% end %>
 </html>

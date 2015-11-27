@@ -8,6 +8,7 @@ gem 'dm-postgres-adapter'
 gem 'sinatra'
 gem 'sinatra-flash'
 gem 'dm-validations'
+gem 'time_difference'
 
 group :test do
   gem 'byebug'
