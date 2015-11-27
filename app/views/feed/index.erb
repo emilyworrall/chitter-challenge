@@ -1,9 +1,8 @@
 <% @peeps.reverse.each do |peep| %>
   <ul id="feed-box">
-    <ol>
-      <b>@<%= peep.username %></b>
-      <%= peep.message %>
-      <%= peep.time %>
+    <ol class="peep">
+      <b class="peep-user">@<%= peep.username %></b> <%= peep.message %>
+      <div class="peep-time"><%= relative_time(peep.created_at) %></div>
     </ol>
   </ul>
 <% end %>

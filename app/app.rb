@@ -1,11 +1,22 @@
 require_relative './data_mapper_setup'
+require './spec/helpers/timestamper'
+require_relative 'helpers'
 
 class Chitter < Sinatra::Base
+
+  include Helpers
+  include Timestamper
+
   set :views, proc {File.join(root,'..','/app/views')}
-  enable :sessions
-  set :session_secret, 'super secret'
-  register Sinatra::Flash
+
   use Rack::MethodOverride
+
+  enable :sessions
+  set :static, true
+  set :root, File.dirname(__FILE__)
+  set :session_secret, 'super secret'
+
+  register Sinatra::Flash
 
   get '/feed' do
     @peeps = Peep.all
@@ -19,8 +30,7 @@ class Chitter < Sinatra::Base
   post '/feed' do
     peep = Peep.new(message: params[:message],
                     username: session[:username],
-                    name: session[:name],
-                    time: Time.now)
+                    name: session[:name])
     peep.save
     redirect ('/feed')
   end
@@ -69,12 +79,6 @@ class Chitter < Sinatra::Base
 
   get '/sessions/goodbye' do
     erb :'sessions/goodbye'
-  end
-
-  helpers do
-    def current_user
-      @current_user ||= User.get(session[:user_id])
-    end
   end
 
 end

@@ -34,3 +34,8 @@ body {
   border-width: 1px;
   background-color: #ffffff;
 }
+
+.peep-time {
+  float: right;
+  width: 131px;
+}
